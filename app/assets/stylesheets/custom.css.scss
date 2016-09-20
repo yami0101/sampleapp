@@ -132,6 +132,12 @@ aside {
       display: block;
       margin-bottom: 3px;
       line-height: 1;
+      &.sub {
+        display: inline;
+        font-size: 0.6rem;
+        color: $grayLight;
+        text-transform: uppercase;
+      }
     }
     h1 {
       font-size: 1.4em;
