@@ -129,7 +129,7 @@ aside {
       padding-top: 0;
     }
     span {
-      display: block;
+      //display: block;
       margin-bottom: 3px;
       line-height: 1;
       &.sub {
@@ -221,4 +221,9 @@ aside {
     height: 100px;
     margin-bottom: 5px;
   }
+}
+
+.counter {
+  border-bottom: 1px solid $grayLighter;
+  margin-bottom: 8px;
 }
