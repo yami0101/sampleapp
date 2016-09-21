@@ -9,6 +9,13 @@ class User < ActiveRecord::Base
   has_secure_password
   validates :password, length: { minimum: 6 }
 
+  has_many :microposts, dependent: :destroy
+
+  def feed
+    # TEMP
+    Micropost.where("user_id = ?", id)
+  end
+
   def self.encrypt(token)
     Digest::SHA1.hexdigest(token.to_s)
   end
