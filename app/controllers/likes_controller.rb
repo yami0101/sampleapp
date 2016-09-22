@@ -5,7 +5,7 @@ class LikesController < ApplicationController
     @micropost = Micropost.find(params[:like][:micropost_id])
     current_user.like!(@micropost)
     respond_to do |format|
-      format.html { redirect_to :back }
+      format.html { redirect_to root_path }
       format.js
     end
   end
@@ -14,7 +14,7 @@ class LikesController < ApplicationController
     @micropost = Micropost.find(params[:like][:micropost_id])
     current_user.unlike!(@micropost)
     respond_to do |format|
-      format.html { redirect_to @user }
+      format.html { redirect_to root_path }
       format.js
     end
   end

@@ -1,0 +1,2 @@
+$('.likes[data-id="<%= @micropost.id %>"]')
+    .html("<%= escape_javascript(render('shared/unlike')) %>");

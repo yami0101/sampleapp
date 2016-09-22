@@ -20,8 +20,8 @@ ActiveRecord::Schema.define(version: 20160922121240) do
     t.integer  "micropost_id"
   end
 
-  add_index "likes", ["liker_id"], name: "index_likes_on_liked_id_and_liker_id", unique: true
   add_index "likes", ["liker_id"], name: "index_likes_on_liker_id"
+  add_index "likes", ["micropost_id", "liker_id"], name: "index_likes_on_micropost_id_and_liker_id", unique: true
   add_index "likes", ["micropost_id"], name: "index_likes_on_micropost_id"
 
   create_table "microposts", force: true do |t|
