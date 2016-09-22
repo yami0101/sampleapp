@@ -1,0 +1,5 @@
+<%= form_for(current_user.unlike!(micropost), html: { method: :delete },
+             remote: true) do |f| %>
+  <%= likes = micropost.likes.count.to_s + " likes." %>
+  <%= f.submit likes %>
+<% end %>

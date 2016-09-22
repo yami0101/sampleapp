@@ -11,18 +11,36 @@ class User < ActiveRecord::Base
 
   has_many :microposts, dependent: :destroy
   has_many :relationships, foreign_key: "follower_id", dependent: :destroy
-  has_many :reverse_relationships, foreign_key: "followed_id", class_name: "Relationship", dependent: :destroy
+  has_many :reverse_relationships, foreign_key: "followed_id",
+           class_name: "Relationship", dependent: :destroy
+
   has_many :followed_users, through: :relationships, source: :followed
   has_many :followers, through: :reverse_relationships, source: :follower
+  has_many :likes, foreign_key: "liker_id", dependent: :destroy
+
 
   def feed
     # TEMP
     Micropost.from_users_followed_by(self)
+
+  end
+
+  def like!(micropost)
+    likes.create!(micropost_id: micropost.id)
+  end
+
+  def unlike!(micropost)
+    likes.find_by(micropost_id: micropost.id).destroy!
+  end
+
+  def liking?(micropost)
+    likes.find_by(micropost_id: micropost.id)
   end
 
   def following?(other_user)
     relationships.find_by(followed_id: other_user.id)
   end
+
 
   def follow!(other_user)
     relationships.create!(followed_id: other_user.id)

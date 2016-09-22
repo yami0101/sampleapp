@@ -11,7 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160921134955) do
+ActiveRecord::Schema.define(version: 20160922121240) do
+
+  create_table "likes", force: true do |t|
+    t.integer  "liker_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "micropost_id"
+  end
+
+  add_index "likes", ["liker_id"], name: "index_likes_on_liked_id_and_liker_id", unique: true
+  add_index "likes", ["liker_id"], name: "index_likes_on_liker_id"
+  add_index "likes", ["micropost_id"], name: "index_likes_on_micropost_id"
 
   create_table "microposts", force: true do |t|
     t.string   "content"

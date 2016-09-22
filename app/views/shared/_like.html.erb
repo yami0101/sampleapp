@@ -1,0 +1,6 @@
+<%= form_for(current_user.like!(micropost),
+             remote: true) do |f| %>
+  <%= likes = micropost.likes.count.to_s + " likes." %>
+  <%= f.hidden_field :micropost_id %>
+  <%= f.submit likes %>
+<% end %>
