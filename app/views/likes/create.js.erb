@@ -1,2 +1,4 @@
-$('.likes[data-id="<%= @micropost.id %>"]')
+$currentLikes = $('.microposts li[data-id="<%= @micropost.id %>"] .likes');
+$currentLikes
     .html("<%= escape_javascript(render('shared/unlike')) %>");
+

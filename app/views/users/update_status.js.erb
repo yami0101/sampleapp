@@ -1,0 +1,3 @@
+$('.status-form').replaceWith("<%= j render partial: 'shared/edit_status' %>");
+$statuses = $('.microposts li[data-user="<%= current_user.id %>"] .status');
+$statuses.text("<%= current_user.status %>");

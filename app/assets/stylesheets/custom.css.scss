@@ -263,3 +263,23 @@ aside {
     font-weight: bold;
   }
 }
+
+/* status edit */
+.status-form {
+  margin: 0;
+  input[type="text"] {
+    width: 70%;
+    margin-bottom: 8px;
+  }
+  input[type="submit"] {
+    display: none;
+  }
+}
+
+.status {
+  color: $grayLight;
+
+  &.edit-status {
+    color: #1e1e1e;
+  }
+}

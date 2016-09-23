@@ -1,0 +1,6 @@
+<% @user = current_user %>
+<%= form_for(@user, html: {class: "status-form"}, remote: true,
+             url: {action: 'update_status'}) do |f| %>
+  <%= f.text_field(:status) %>
+  <%= f.submit('') %>
+<% end %>

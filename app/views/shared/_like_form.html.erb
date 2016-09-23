@@ -1,10 +1,8 @@
 <% @micropost = micropost %>
-<span class="likes <%= "liked" if current_user.liking?(micropost) %>"
-  data-id="<%= @micropost.id %>"
->
+<span class="likes <%= "liked" if current_user.liking?(micropost) %>">
   <% if current_user.liking?(micropost) %>
-    <%= render partial: 'shared/unlike', locals: {micropost: micropost} %>
+    <%= render partial: 'shared/unlike' %>
   <% else %>
-      <%= render partial: 'shared/like', locals: {micropost: micropost} %>
+      <%= render partial: 'shared/like' %>
   <% end %>
 </span>

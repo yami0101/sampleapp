@@ -11,6 +11,11 @@
           </span>
         <% end %>
       </h1>
+      <% if @user == current_user %>
+        <%= render partial: 'shared/edit_status'%>
+      <% else %>
+        <%= render partial: 'shared/status', locals: {user: @user}%>
+      <% end %>
     </section>
     <section>
       <%= render 'shared/stats' %>

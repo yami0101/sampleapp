@@ -40,6 +40,17 @@ class UsersController < ApplicationController
     end
   end
 
+  def update_status
+    p current_user.valid?
+    p current_user.errors.full_messages
+    p current_user.password
+    if current_user.update_attribute(:status, user_params[:status])
+      respond_to do |format|
+        format.js {}
+      end
+    end
+  end
+
   def destroy
     User.find(params[:id]).destroy
     flash[:success] = "User deleted."
@@ -53,6 +64,12 @@ class UsersController < ApplicationController
     render 'show_follow'
   end
 
+  def edit_status
+    respond_to do |format|
+      format.js {}
+    end
+  end
+
   def followers
     @title = "Followers"
     @user = User.find(params[:id])
@@ -62,8 +79,8 @@ class UsersController < ApplicationController
 
   private
 
-    def user_params
-      params.require(:user).permit(:name, :email, :password, :password_confirmation)
+    def user_params()
+      params.require(:user).permit(:name, :email, :password, :password_confirmation, :status)
     end
 
     # Before filters

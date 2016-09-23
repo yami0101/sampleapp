@@ -1,0 +1,9 @@
+<% if current_user.status.blank?%>
+  <span class="status edit-status">Add status</span>
+<% else %>
+  <span class="status edit-status"><%= current_user.status %></span>
+<% end %>
+
+<% content_for :partial_scripts do %>
+  <%= javascript_include_tag 'partials/_edit_status' %>
+<% end %>

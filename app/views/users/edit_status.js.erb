@@ -1,0 +1,5 @@
+$editStatus = $('.edit-status');
+$editStatus.replaceWith("<%= j render partial: 'shared/edit_status_form' %>");
+$form = $('.status-form input[type="text"]');
+$form.focus();
+$form.select();
