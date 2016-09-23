@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160923065059) do
+ActiveRecord::Schema.define(version: 20160923122603) do
 
   create_table "likes", force: true do |t|
     t.integer  "liker_id"
@@ -43,6 +43,17 @@ ActiveRecord::Schema.define(version: 20160923065059) do
   add_index "relationships", ["followed_id"], name: "index_relationships_on_followed_id"
   add_index "relationships", ["follower_id", "followed_id"], name: "index_relationships_on_follower_id_and_followed_id", unique: true
   add_index "relationships", ["follower_id"], name: "index_relationships_on_follower_id"
+
+  create_table "replies", force: true do |t|
+    t.integer  "micropost_id"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "replies", ["micropost_id", "user_id"], name: "index_replies_on_micropost_id_and_user_id", unique: true
+  add_index "replies", ["micropost_id"], name: "index_replies_on_micropost_id"
+  add_index "replies", ["user_id"], name: "index_replies_on_user_id"
 
   create_table "users", force: true do |t|
     t.string   "name"

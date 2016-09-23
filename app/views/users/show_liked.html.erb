@@ -1,0 +1,22 @@
+<%= provide(:title, @title) %>
+<% @feed_items = @microposts %>
+<div class="row">
+  <aside class="span4">
+    <section>
+      <%= gravatar_for @user %>
+      <h1><%= @user.name %></h1>
+      <% if @user == current_user %>
+        <%= render partial: 'shared/edit_status'%>
+      <% else %>
+        <%= render partial: 'shared/status', locals: {user: @user}%>
+      <% end %>
+    </section>
+    <section>
+      <%= render 'shared/stats' %>
+    </section>
+  </aside>
+  <div class="span8">
+    <h3><%= @title %></h3>
+    <%= render 'shared/feed' %>
+  </div>
+</div>

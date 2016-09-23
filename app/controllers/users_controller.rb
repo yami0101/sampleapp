@@ -64,6 +64,17 @@ class UsersController < ApplicationController
     render 'show_follow'
   end
 
+  def liked
+    @title = "Liked Microposts"
+    @user = User.find(params[:id])
+    @microposts = []
+    @user.likes.each do |like|
+      @microposts << like.micropost
+    end
+    @microposts = @microposts.paginate(page: params[:page])
+    render 'show_liked'
+  end
+
   def edit_status
     respond_to do |format|
       format.js {}

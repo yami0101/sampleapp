@@ -5,6 +5,11 @@ class Micropost < ActiveRecord::Base
   belongs_to :user
 
   has_many :likes, dependent: :destroy
+  has_many :replies, dependent: :destroy
+
+  def reply!(user)
+    replies.create!(user_id: user.id)
+  end
 
   def self.from_users_followed_by(user)
     followed_user_ids = "SELECT followed_id FROM relationships WHERE follower_id = :user_id"
