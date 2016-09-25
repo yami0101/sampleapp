@@ -41,13 +41,11 @@ class UsersController < ApplicationController
   end
 
   def update_status
-    p current_user.valid?
-    p current_user.errors.full_messages
-    p current_user.password
-    if current_user.update_attribute(:status, user_params[:status])
-      respond_to do |format|
-        format.js {}
-      end
+    if User.valid_attribute?(:status, user_params[:status])
+      current_user.update_attribute(:status, user_params[:status])
+    end
+    respond_to do |format|
+      format.js {}
     end
   end
 

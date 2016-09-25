@@ -2,3 +2,4 @@ $currentLikes = $('.microposts li[data-id="<%= @micropost.id %>"] .likes');
 $currentLikes
     .html("<%= escape_javascript(render('shared/unlike')) %>");
 
+$('a[href="<%= liked_user_path(current_user) %>"] #likes').text("<%= current_user.likes.count %>");

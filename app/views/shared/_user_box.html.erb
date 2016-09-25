@@ -1,0 +1,17 @@
+<section>
+  <h1>
+    <%= gravatar_for @user %>
+    <%= @user.name %>
+    <% if current_user == @user %>
+      <span class="sub">
+        you
+      </span>
+    <% end %>
+  </h1>
+  <% if @user == current_user %>
+    <%= render partial: 'shared/edit_status'%>
+    <%= link_to "view my profile", current_user %>
+  <% else %>
+    <%= render partial: 'shared/status', locals: {user: @user}%>
+  <% end %>
+</section>

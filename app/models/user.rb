@@ -59,6 +59,12 @@ class User < ActiveRecord::Base
     SecureRandom.urlsafe_base64
   end
 
+  def self.valid_attribute?(attr, val)
+    temp = self.new(attr => val)
+    temp.valid?
+    !temp.errors.has_key?(attr)
+  end
+
   private
 
     def create_remember_token
