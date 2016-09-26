@@ -17,12 +17,14 @@ class User < ActiveRecord::Base
 
   has_many :followed_users, through: :relationships, source: :followed
   has_many :followers, through: :reverse_relationships, source: :follower
-  has_many :likes, foreign_key: "liker_id", dependent: :destroy
+  has_many :likes, dependent: :destroy
   has_many :replies, dependent: :destroy
 
+  def replied
+    Micropost.in_reply_to(self)
+  end
 
   def feed
-    # TEMP
     Micropost.from_users_followed_by(self)
   end
 

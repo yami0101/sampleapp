@@ -18,4 +18,10 @@
     </strong>
     likes
   </a>
+  <a href="<%= replies_user_path(@user) %>">
+    <strong id="likes" class="stat">
+      <%= @user.replies.count %>
+    </strong>
+    replies
+  </a>
 </div>

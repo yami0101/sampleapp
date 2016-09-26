@@ -219,4 +219,28 @@ describe "User pages" do
       it { should have_link(user.name, href: user_path(user)) }
     end
   end
+
+  describe "liked" do
+    let (:user) { FactoryGirl.create(:user) }
+    let (:other_user) { FactoryGirl.create(:user) }
+    let (:m1) { FactoryGirl.create(:micropost, user: user) }
+
+    describe "page" do
+      before do
+        sign_in user
+        visit liked_user_path(other_user)
+      end
+
+      it { should have_title(full_title('Liked Microposts')) }
+      it { should_not have_selector ("li[data-id]") }
+
+      describe "with liked post" do
+        before do
+          other_user.like!(m1)
+          visit liked_user_path(other_user)
+        end
+        it { should have_selector("li[data-id=\"#{m1.id}\"]") }
+      end
+    end
+  end
 end

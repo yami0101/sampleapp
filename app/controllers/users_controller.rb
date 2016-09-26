@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :signed_in_user, only: [:edit, :update, :index, :destroy, :followers, :following]
+  before_action :signed_in_user, only: [:edit, :update, :index, :destroy, :followers, :following, :liked, :replies]
   before_action :correct_user, only: [:edit, :update]
   before_action :unsigned_in_user, only: [:new, :create]
   before_action :admin_user, only: :destroy
@@ -49,6 +49,12 @@ class UsersController < ApplicationController
     end
   end
 
+  def edit_status
+    respond_to do |format|
+      format.js {}
+    end
+  end
+
   def destroy
     User.find(params[:id]).destroy
     flash[:success] = "User deleted."
@@ -62,6 +68,13 @@ class UsersController < ApplicationController
     render 'show_follow'
   end
 
+  def followers
+    @title = "Followers"
+    @user = User.find(params[:id])
+    @users = @user.followers.paginate(page: params[:page])
+    render 'show_follow'
+  end
+
   def liked
     @title = "Liked Microposts"
     @user = User.find(params[:id])
@@ -69,21 +82,16 @@ class UsersController < ApplicationController
     @user.likes.each do |like|
       @microposts << like.micropost
     end
-    @microposts = @microposts.paginate(page: params[:page])
+    @microposts.sort_by! { |item| item.created_at }
+    @microposts = @microposts.reverse.paginate(page: params[:page])
     render 'show_liked'
   end
 
-  def edit_status
-    respond_to do |format|
-      format.js {}
-    end
-  end
-
-  def followers
-    @title = "Followers"
+  def replies
+    @title = "Replies"
     @user = User.find(params[:id])
-    @users = @user.followers.paginate(page: params[:page])
-    render 'show_follow'
+    @microposts = @user.replied.paginate(page: params[:page])
+    render 'show_replies'
   end
 
   private

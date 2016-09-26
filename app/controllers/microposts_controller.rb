@@ -3,7 +3,6 @@ class MicropostsController < ApplicationController
   before_action :correct_user, only: :destroy
 
   def create
-    create_replies
     @micropost = current_user.microposts.build(micropost_params)
     if @micropost.save
       flash[:success] = "Micropost created!"
@@ -30,10 +29,5 @@ class MicropostsController < ApplicationController
       redirect_to root_url if @micropost.nil?
     end
 
-    def create_replies
-      params[:micropost][:content].scan(/@(\w+)/) do |match|
-        p "MAAAAAATCH"
-        p User.where("name = ?", match)
-      end
-    end
+
 end

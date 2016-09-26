@@ -1,0 +1,14 @@
+<%= provide(:title, @title) %>
+<% @feed_items = @microposts %>
+<div class="row">
+  <aside class="span4">
+    <%= render 'shared/user_box' %>
+    <section>
+      <%= render 'shared/stats' %>
+    </section>
+  </aside>
+  <div class="span8">
+    <h3><%= @title %></h3>
+    <%= render 'shared/feed' %>
+  </div>
+</div>
