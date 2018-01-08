@@ -1,0 +1,27 @@
+version: '3'
+services:
+  #WEB_APP course container.
+  web:
+    build: .
+    image: sampleapp:development
+    volumes:
+      - .:/home/sampleapp/current
+#      - /home/cube/ubuntu_mount:/home/tarasov_ru/current/db
+      - db:/home/sampleapp/current/db
+    ports:
+      - "80:9000"
+#    env_file:
+#      - ./secrets.env
+    command: bundle exec puma -p 9000
+  #command: ./start.sh
+  backup:
+    image: linuxserver/duplicati:latest
+    ports:
+      - '8200:8200'
+    volumes:
+      - db:/sampleapp_db
+      - config:/config
+volumes:
+  db:
+  config:
+  # Mount volume with default driver
