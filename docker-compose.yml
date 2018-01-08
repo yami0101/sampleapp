@@ -5,7 +5,7 @@ services:
     build: .
     image: sampleapp:development
     volumes:
-      - .:/home/sampleapp/current
+#      - .:/home/sampleapp/current
 #      - /home/cube/ubuntu_mount:/home/tarasov_ru/current/db
       - db:/home/sampleapp/current/db
     ports:
